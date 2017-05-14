@@ -1,0 +1,20 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: ucdapi-deployment
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: ucdapi
+    spec:
+      containers:
+        - name: ucdapi
+          image: eu.gcr.io/decisive-cinema-167507/ucdapi
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APPROOT
+              value: 'https://ucdapi.org'

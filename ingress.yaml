@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: global-ingress
+  annotations:
+    kubernetes.io/tls-acme: 'true'
+    kubernetes.io/ingress.class: 'gce'
+spec:
+  tls:
+    - hosts:
+        - ucdapi.org
+      secretName: acme-tls
+  rules:
+    - host: ucdapi.org
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ucdapi
+              servicePort: 80
