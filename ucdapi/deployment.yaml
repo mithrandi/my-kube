@@ -16,7 +16,5 @@ spec:
           ports:
             - containerPort: 3000
           env:
-            - name: APPROOT
-              value: 'https://ucdapi.org'
             - name: IP_FROM_HEADER
               value: 'true'
