@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: global-ingress6
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: 'lbv6'
+    kubernetes.io/ingress.class: 'gce'
+spec:
+  tls:
+    - hosts:
+        - ucdapi.org
+        - pb.codehash.net
+      secretName: acme-tls
+  rules:
+    - host: ucdapi.org
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ucdapi
+              servicePort: 80
+    - host: pb.codehash.net
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: codetip
+              servicePort: 80
