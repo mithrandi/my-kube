@@ -9,6 +9,7 @@ spec:
   tls:
     - hosts:
         - ucdapi.org
+        - pb.codehash.net
       secretName: acme-tls
   rules:
     - host: ucdapi.org
@@ -17,4 +18,11 @@ spec:
           - path: /*
             backend:
               serviceName: ucdapi
+              servicePort: 80
+    - host: pb.codehash.net
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: codetip
               servicePort: 80
