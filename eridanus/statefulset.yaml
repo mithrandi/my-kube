@@ -1,0 +1,53 @@
+apiVersion: "apps/v1beta1"
+kind: StatefulSet
+metadata:
+  name: eridanus
+spec:
+  serviceName: eridanus
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eridanus
+    spec:
+      containers:
+        - name: eridanus
+          image: eu.gcr.io/decisive-cinema-167507/eridanus:26cabd0
+          volumeMounts:
+            - name: eridanus-data
+              mountPath: /db
+  volumeClaimTemplates:
+    - metadata:
+        name: eridanus-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100M
+---
+apiVersion: "apps/v1beta1"
+kind: StatefulSet
+metadata:
+  name: eridanus-slack
+spec:
+  serviceName: eridanus-slack
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: eridanus-slack
+    spec:
+      containers:
+        - name: eridanus-slack
+          image: eu.gcr.io/decisive-cinema-167507/eridanus:26cabd0
+          volumeMounts:
+            - name: eridanus-slack-data
+              mountPath: /db
+  volumeClaimTemplates:
+    - metadata:
+        name: eridanus-slack-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 100M
