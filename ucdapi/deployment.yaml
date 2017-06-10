@@ -12,9 +12,11 @@ spec:
     spec:
       containers:
         - name: ucdapi
-          image: eu.gcr.io/decisive-cinema-167507/ucdapi:f96ef95
+          image: eu.gcr.io/decisive-cinema-167507/ucdapi:2ba982f
           ports:
             - containerPort: 3000
           env:
+            - name: APPROOT
+              value: 'https://ucdapi.org'
             - name: IP_FROM_HEADER
               value: 'true'
