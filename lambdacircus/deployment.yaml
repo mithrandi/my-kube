@@ -1,0 +1,68 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: lambdacircus-deployment
+spec:
+  replicas: 3
+  revisionHistoryLimit: 2
+  template:
+    metadata:
+      labels:
+        app: lambdacircus
+    spec:
+      containers:
+        - name: lambdacircus
+          image: eu.gcr.io/decisive-cinema-167507/lambdacircus:6a1d8b4
+          args:
+            - 'Production'
+          ports:
+            - containerPort: 3000
+          env:
+            - name: APPROOT
+              value: 'https://qdb.codehash.net'
+            - name: IP_FROM_HEADER
+              value: 'true'
+            - name: PGHOST
+              value: '127.0.0.1'
+            - name: PGPORT
+              value: '5432'
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: lambdacircus-db-credentials
+                  key: username
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: lambdacircus-db-credentials
+                  key: password
+            - name: PGDATABASE
+              value: 'lambdacircus'
+          resources:
+            requests:
+              cpu: "10m"
+        - image: gcr.io/cloudsql-docker/gce-proxy:1.09
+          name: cloudsql-proxy
+          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
+                    "-instances=decisive-cinema-167507:europe-west1:pg-global=tcp:5432",
+                    "-credential_file=/secrets/cloudsql/credentials.json"]
+          volumeMounts:
+            - name: cloudsql-instance-credentials
+              mountPath: /secrets/cloudsql
+              readOnly: true
+            - name: ssl-certs
+              mountPath: /etc/ssl/certs
+            - name: cloudsql
+              mountPath: /cloudsql
+          resources:
+            requests:
+              cpu: "10m"
+      volumes:
+        - name: cloudsql-instance-credentials
+          secret:
+            secretName: cloudsql-instance-credentials
+        - name: ssl-certs
+          hostPath:
+            path: /etc/ssl/certs
+        - name: cloudsql
+          emptyDir:
