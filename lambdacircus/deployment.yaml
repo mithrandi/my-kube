@@ -12,9 +12,7 @@ spec:
     spec:
       containers:
         - name: lambdacircus
-          image: eu.gcr.io/decisive-cinema-167507/lambdacircus:6a1d8b4
-          args:
-            - 'Production'
+          image: eu.gcr.io/decisive-cinema-167507/lambdacircus:6567ffc
           ports:
             - containerPort: 3000
           env:
@@ -38,6 +36,11 @@ spec:
                   key: password
             - name: PGDATABASE
               value: 'lambdacircus'
+            - name: LAMBDACIRCUS_CLIENT_SESSION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: lambdacircus-client-session-key
+                  key: key
           resources:
             requests:
               cpu: "10m"
