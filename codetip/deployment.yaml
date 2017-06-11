@@ -29,6 +29,9 @@ spec:
                 secretKeyRef:
                   name: codetip-db-credentials
                   key: password
+          resources:
+            requests:
+              cpu: "10m"
         - image: gcr.io/cloudsql-docker/gce-proxy:1.09
           name: cloudsql-proxy
           command: ["/cloud_sql_proxy", "--dir=/cloudsql",
@@ -42,6 +45,9 @@ spec:
               mountPath: /etc/ssl/certs
             - name: cloudsql
               mountPath: /cloudsql
+          resources:
+            requests:
+              cpu: "10m"
       volumes:
         - name: cloudsql-instance-credentials
           secret:
