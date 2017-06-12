@@ -1,0 +1,44 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: kube-cert-manager
+  name: kube-cert-manager
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: kube-cert-manager
+      name: kube-cert-manager
+    spec:
+      containers:
+        - name: kube-cert-manager
+          image: gcr.io/decisive-cinema-167507/kube-cert-manager@sha256:4e79e70added5a2e95fb10bf9a63e4234395a3e047c9bf6a6c1131c383c9f04a
+          args:
+            - "-data-dir=/var/lib/cert-manager"
+            - "-acme-url=https://acme-v01.api.letsencrypt.org/directory"
+            - "-default-email=mithrandi@mithrandi.net"
+            - "-default-provider=route53"
+          env:
+            - name: 'AWS_ACCESS_KEY_ID'
+              valueFrom:
+                secretKeyRef:
+                  name: kcm-route53-credentials
+                  key: access
+            - name: 'AWS_SECRET_ACCESS_KEY'
+              valueFrom:
+                secretKeyRef:
+                  name: kcm-route53-credentials
+                  key: secret
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/cert-manager
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: "data"
+          persistentVolumeClaim:
+            claimName: kcm-data

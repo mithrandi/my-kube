@@ -1,3 +1,0 @@
-config:
-  LEGO_EMAIL: mithrandi@mithrandi.net
-  LEGO_URL: https://acme-v01.api.letsencrypt.org/directory

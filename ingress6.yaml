@@ -10,19 +10,24 @@ spec:
     - hosts:
         - ucdapi.org
         - pb.codehash.net
+        - qdb.codehash.net
       secretName: acme-tls
   rules:
     - host: ucdapi.org
       http:
         paths:
-          - path: /*
-            backend:
+          - backend:
               serviceName: ucdapi
               servicePort: 80
     - host: pb.codehash.net
       http:
         paths:
-          - path: /*
-            backend:
+          - backend:
               serviceName: codetip
+              servicePort: 80
+    - host: qdb.codehash.net
+      http:
+        paths:
+          - backend:
+              serviceName: lambdacircus
               servicePort: 80
