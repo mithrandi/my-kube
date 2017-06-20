@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: lambdacircus
-          image: eu.gcr.io/decisive-cinema-167507/lambdacircus:a477f38
+          image: eu.gcr.io/decisive-cinema-167507/lambdacircus:d531b2e
           ports:
             - containerPort: 3000
           env:
