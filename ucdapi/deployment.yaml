@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: ucdapi
-          image: eu.gcr.io/decisive-cinema-167507/ucdapi:2ba982f
+          image: eu.gcr.io/decisive-cinema-167507/ucdapi:6e0c3e5
           ports:
             - containerPort: 3000
           env:
