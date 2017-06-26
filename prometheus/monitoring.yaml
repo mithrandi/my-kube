@@ -7,6 +7,8 @@ spec:
     matchLabels:
       team: global
   version: v1.7.1
+  # Temporary until we set up some kind of auth
+  externalUrl: http://127.0.0.1:8001/api/v1/proxy/namespaces/default/services/prometheus-global:web/
   resources:
     requests:
       memory: 400Mi
@@ -14,3 +16,17 @@ spec:
     resources:
       requests:
         storage: 40Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-global
+spec:
+  type: ClusterIP
+  ports:
+  - name: web
+    port: 9090
+    protocol: TCP
+    targetPort: web
+  selector:
+    prometheus: prometheus
