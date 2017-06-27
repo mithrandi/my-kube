@@ -4,6 +4,15 @@ dashboard = G.Dashboard(
     title='UCDAPI',
     rows=[
         G.Row(panels=[
+            G.SingleStat(
+                title='Pods Up',
+                dataSource='prometheus',
+                targets=[
+                    G.Target(
+                        expr='count by(service) (up{service="ucdapi"} == 1)',
+                    )]),
+        ]),
+        G.Row(panels=[
             G.Graph(
                 title='RPS',
                 dataSource='prometheus',
@@ -24,7 +33,7 @@ dashboard = G.Dashboard(
                 targets=[
                     G.Target(
                         expr='http_request_duration_seconds{quantile="0.9",status_code="200",service="ucdapi"}*1000',
-                        legendFormat='{{pod}} 0.9 q',
+                        legendFormat='{{pod}}',
                         refId='A',
                     ),
                 ],
@@ -38,7 +47,7 @@ dashboard = G.Dashboard(
                 targets=[
                     G.Target(
                         expr='http_request_duration_seconds{quantile="0.99",status_code="200",service="ucdapi"}*1000',
-                        legendFormat='{{pod}} 0.99 q',
+                        legendFormat='{{pod}}',
                         refId='A',
                     ),
                 ],
