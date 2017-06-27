@@ -7,6 +7,8 @@ dashboard = G.Dashboard(
             G.SingleStat(
                 title='Pods Up',
                 dataSource='prometheus',
+                valueName='current',
+                sparkline=G.SparkLine(show=True),
                 targets=[
                     G.Target(
                         expr='count by(service) (up{service="ucdapi"} == 1)',
