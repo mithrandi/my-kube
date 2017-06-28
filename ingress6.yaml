@@ -11,6 +11,7 @@ spec:
         - ucdapi.org
         - pb.codehash.net
         - qdb.codehash.net
+        - graphs.mithrandi.net
       secretName: acme-tls
   rules:
     - host: ucdapi.org
@@ -31,3 +32,9 @@ spec:
           - backend:
               serviceName: lambdacircus
               servicePort: 80
+    - host: graphs.mithrandi.net
+      http:
+        paths:
+          - backend:
+              serviceName: grafana
+              servicePort: web
