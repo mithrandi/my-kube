@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Secret
-metadata:
-  name: grafana-credentials
-# This is deliberately insecure nonsense because the service isn't accessible
-# externally; replace this with a real secret or something later.
-data:
-  user: YWRtaW4=
-  password: YWRtaW4=
