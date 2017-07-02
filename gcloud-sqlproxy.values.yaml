@@ -1,0 +1,5 @@
+replicasCount: 3
+cloudsql:
+  instance: 'decisive-cinema-167507:europe-west1:pg-global'
+  port: 5432
+# serviceAccountKey not included here, but must be supplied
