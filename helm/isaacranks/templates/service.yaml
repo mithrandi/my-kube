@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "isaacranks.fullname" . }}
+  labels:
+    app: {{ template "isaacranks.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+    component: web
+spec:
+  type: {{ .Values.service.type | quote }}
+  ports:
+    - name: web
+      port: 80
+      targetPort: 3000
+      protocol: TCP
+  selector:
+    app: {{ template "isaacranks.fullname" . }}
+    component: web
+    release: {{ .Release.Name | quote }}

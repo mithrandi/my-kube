@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ServiceMonitor
+metadata:
+  name: {{ template "isaacranks.fullname" . }}
+  labels:
+    app: {{ template "isaacranks.fullname" . }}
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name | quote }}
+    heritage: {{ .Release.Service | quote }}
+    team: {{ .Values.prometheus.webTeam | quote }}
+    component: web
+spec:
+  selector:
+    matchLabels:
+      app: {{ template "isaacranks.fullname" . }}
+      component: web
+      release: {{ .Release.Name | quote }}
+  endpoints:
+    - port: web
