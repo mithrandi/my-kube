@@ -12,6 +12,7 @@ spec:
         - pb.codehash.net
         - qdb.codehash.net
         - graphs.mithrandi.net
+        - test.isaacranks.com
       secretName: acme-tls
   rules:
     - host: ucdapi.org
@@ -37,4 +38,10 @@ spec:
         paths:
           - backend:
               serviceName: grafana
+              servicePort: web
+    - host: test.isaacranks.com
+      http:
+        paths:
+          - backend:
+              serviceName: isaacranks-test-isaacranks
               servicePort: web
