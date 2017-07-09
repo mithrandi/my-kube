@@ -60,10 +60,8 @@ dashboard = G.Dashboard(
                         refId='E'),
                     ],
                 aliasColors=ALIAS_COLORS,
-                yAxes=[
-                    G.YAxis(format=G.OPS_FORMAT),
-                    G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ],
+                yAxes=[G.YAxis(format=G.OPS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)],
                 nullPointMode=G.NULL_AS_ZERO,
                 stack=True,
                 lineWidth=0,
@@ -87,10 +85,8 @@ dashboard = G.Dashboard(
                         refId='C'),
                     ],
                 aliasColors=ALIAS_COLORS,
-                yAxes=[
-                    G.YAxis(format=G.MILLISECONDS_FORMAT),
-                    G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ]),
+                yAxes=[G.YAxis(format=G.MILLISECONDS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             ]),
         G.Row(panels=[
             G.Graph(
@@ -128,10 +124,8 @@ dashboard = G.Dashboard(
                         legendFormat='0.99q',
                         refId='C'),
                     ],
-                yAxes=[
-                    G.YAxis(format=G.MILLISECONDS_FORMAT),
-                    G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ]),
+                yAxes=[G.YAxis(format=G.MILLISECONDS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             ]),
         G.Row(panels=[
             G.Graph(
@@ -143,10 +137,8 @@ dashboard = G.Dashboard(
                         legendFormat='{{version}}',
                         refId='A')
                     ],
-                yAxes=[
-                    G.YAxis(format=G.OPS_FORMAT),
-                    G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ],
+                yAxes=[G.YAxis(format=G.OPS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)],
                 nullPointMode=G.NULL_AS_ZERO,
                 stack=True,
                 lineWidth=0,
@@ -169,9 +161,21 @@ dashboard = G.Dashboard(
                         legendFormat='0.99q',
                         refId='C'),
                     ],
-                yAxes=[
-                    G.YAxis(format=G.MILLISECONDS_FORMAT),
-                    G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ]),
+                yAxes=[G.YAxis(format=G.MILLISECONDS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             ]),
+        G.Row(panels=[
+            G.Graph(
+                title='Time since last rebuild',
+                dataSource='prometheus',
+                targets=[G.Target(expr='time() - (isaacranks_last_rebuild_timestamp{service="isaacranks-test-rebuild"} != 0)')],
+                yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)]),
+            G.Graph(
+                title='Rebuild duration',
+                dataSource='prometheus',
+                targets=[G.Target(expr='isaacranks_last_rebuild_duration_seconds{service="isaacranks-test-rebuild"} != 0)')],
+                yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
+                       G.YAxis(format=G.SHORT_FORMAT, show=False)]),
+            ])
         ]).auto_panel_ids()
