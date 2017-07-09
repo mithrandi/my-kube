@@ -105,7 +105,12 @@ dashboard = G.Dashboard(
                 yAxes=[
                     G.YAxis(format=G.OPS_FORMAT),
                     G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ]),
+                    ],
+                nullPointMode=G.NULL_AS_ZERO,
+                stack=True,
+                lineWidth=0,
+                fill=10,
+                tooltip=G.Tooltip(valueType=G.INDIVIDUAL)),
             G.Graph(
                 title='Ballot latency',
                 dataSource='prometheus',
@@ -141,7 +146,12 @@ dashboard = G.Dashboard(
                 yAxes=[
                     G.YAxis(format=G.OPS_FORMAT),
                     G.YAxis(format=G.SHORT_FORMAT, show=False),
-                    ]),
+                    ],
+                nullPointMode=G.NULL_AS_ZERO,
+                stack=True,
+                lineWidth=0,
+                fill=10,
+                tooltip=G.Tooltip(valueType=G.INDIVIDUAL)),
             G.Graph(
                 title='Vote latency',
                 dataSource='prometheus',
