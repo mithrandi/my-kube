@@ -174,7 +174,7 @@ dashboard = G.Dashboard(
             G.Graph(
                 title='Rebuild duration',
                 dataSource='prometheus',
-                targets=[G.Target(expr='isaacranks_last_rebuild_duration_seconds{service="isaacranks-test-rebuild"} != 0)')],
+                targets=[G.Target(expr='isaacranks_last_rebuild_duration_seconds{service="isaacranks-test-rebuild"} != 0')],
                 yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
                        G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             ])
