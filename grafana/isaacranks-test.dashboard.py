@@ -168,13 +168,19 @@ dashboard = G.Dashboard(
             G.Graph(
                 title='Time since last rebuild',
                 dataSource='prometheus',
-                targets=[G.Target(expr='time() - (isaacranks_last_rebuild_timestamp{service="isaacranks-test-rebuild"} != 0)')],
+                targets=[G.Target(
+                    expr='time() - (isaacranks_last_rebuild_timestamp{service="isaacranks-test-rebuild"} != 0)',
+                    legendFormat='Age')],
+                legend=G.Legend(current=True),
                 yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
                        G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             G.Graph(
                 title='Rebuild duration',
                 dataSource='prometheus',
-                targets=[G.Target(expr='isaacranks_last_rebuild_duration_seconds{service="isaacranks-test-rebuild"} != 0')],
+                targets=[G.Target(
+                    expr='isaacranks_last_rebuild_duration_seconds{service="isaacranks-test-rebuild"} != 0',
+                    legendFormat='Duration')],
+                legend=G.Legend(current=True),
                 yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
                        G.YAxis(format=G.SHORT_FORMAT, show=False)]),
             ])
