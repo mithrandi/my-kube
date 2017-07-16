@@ -9,7 +9,7 @@ metadata:
     heritage: {{ .Release.Service | quote }}
     component: rebuild
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   template:
     metadata:
       labels:

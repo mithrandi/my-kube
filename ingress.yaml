@@ -14,6 +14,7 @@ spec:
         - qdb.codehash.net
         - graphs.mithrandi.net
         - test.isaacranks.com
+        - www.isaacranks.com
       secretName: acme-tls
   rules:
     - host: ucdapi.org
@@ -45,6 +46,12 @@ spec:
         paths:
           - backend:
               serviceName: isaacranks-test-isaacranks
+              servicePort: web
+    - host: www.isaacranks.com
+      http:
+        paths:
+          - backend:
+              serviceName: isaacranks-prod-isaacranks
               servicePort: web
 ---
 apiVersion: extensions/v1beta1
@@ -62,6 +69,7 @@ spec:
         - qdb.codehash.net
         - graphs.mithrandi.net
         - test.isaacranks.com
+        - www.isaacranks.com
       secretName: acme-tls
   rules:
     - host: ucdapi.org
@@ -93,4 +101,10 @@ spec:
         paths:
           - backend:
               serviceName: isaacranks-test-isaacranks
+              servicePort: web
+    - host: www.isaacranks.com
+      http:
+        paths:
+          - backend:
+              serviceName: isaacranks-prod-isaacranks
               servicePort: web

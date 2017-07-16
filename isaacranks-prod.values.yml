@@ -1,0 +1,5 @@
+replicaCount: 3
+db:
+  hostname: gcloud-sqlproxy-gcloud-sqlproxy
+  secretName: isaacranks-prod-db-credentials
+  database: isaacranks_prod
