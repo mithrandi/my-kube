@@ -1,5 +1,12 @@
-replicasCount: 3
+replicasCount: 2
 cloudsql:
   instance: 'decisive-cinema-167507:europe-west1:pg-global'
   port: 5432
 # serviceAccountKey not included here, but must be supplied
+resources:
+  requests:
+    cpu: 10m
+    memory: 100Mi
+  limits:
+    cpu: 150m
+    memory: 150Mi
