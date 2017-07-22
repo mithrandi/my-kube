@@ -6,6 +6,7 @@ metadata:
     stable.k8s.psg.io/kcm.class: 'default'
   annotations:
     kubernetes.io/ingress.class: 'gce'
+    kubernetes.io/ingress.global-static-ip-name: 'k8s-fw-default-global-ingress--6928bd11e243f349'
 spec:
   tls:
     - hosts:
