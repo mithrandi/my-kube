@@ -42,23 +42,23 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='sum(irate(http_request_duration_seconds_count{{service="{}-isaacranks",status_code=~"1.."}}[5m]))',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"1.."}}',
                             legendFormat='1xx',
                             refId='A'),
                         target(
-                            expr='sum(irate(http_request_duration_seconds_count{{service="{}-isaacranks",status_code=~"2.."}}[5m]))',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"2.."}}',
                             legendFormat='2xx',
                             refId='B'),
                         target(
-                            expr='sum(irate(http_request_duration_seconds_count{{service="{}-isaacranks",status_code=~"3.."}}[5m]))',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"3.."}}',
                             legendFormat='3xx',
                             refId='C'),
                         target(
-                            expr='sum(irate(http_request_duration_seconds_count{{service="{}-isaacranks",status_code=~"4.."}}[5m]))',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"4.."}}',
                             legendFormat='4xx',
                             refId='D'),
                         target(
-                            expr='sum(irate(http_request_duration_seconds_count{{service="{}-isaacranks",status_code=~"5.."}}[5m]))',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"5.."}}',
                             legendFormat='5xx',
                             refId='E'),
                     ],
@@ -75,15 +75,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='histogram_quantile(0.5, sum(irate(http_request_duration_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:http_request_duration_seconds:50p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='histogram_quantile(0.9, sum(irate(http_request_duration_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:http_request_duration_seconds:90p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='histogram_quantile(0.99, sum(irate(http_request_duration_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:http_request_duration_seconds:99p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],
@@ -97,7 +97,7 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='sum(irate(isaacranks_ballot_generation_seconds_count[5m])) by (version)',
+                            expr='service_version:isaacranks_ballot_generation_seconds_count:irate{{service="{}-isaacranks"}}',
                             legendFormat='{{version}}',
                             refId='A')
                     ],
@@ -115,15 +115,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='histogram_quantile(0.5, sum(irate(isaacranks_ballot_generation_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:50p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='histogram_quantile(0.9, sum(irate(isaacranks_ballot_generation_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:90p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='histogram_quantile(0.99, sum(irate(isaacranks_ballot_generation_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:99p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],
@@ -136,7 +136,7 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='sum(irate(isaacranks_vote_casting_seconds_count[5m])) by (version)',
+                            expr='service_version:isaacranks_vote_casting_seconds_count:irate{{service="{}-isaacranks"}}',
                             legendFormat='{{version}}',
                             refId='A')
                     ],
@@ -152,15 +152,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='histogram_quantile(0.5, sum(irate(isaacranks_vote_casting_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:50p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='histogram_quantile(0.9, sum(irate(isaacranks_vote_casting_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:90p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='histogram_quantile(0.99, sum(irate(isaacranks_vote_casting_seconds_bucket{{service="{}-isaacranks"}}[5m])) by (le)) * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:99p{{service="{}-isaacranks"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],

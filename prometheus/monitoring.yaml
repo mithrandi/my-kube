@@ -6,6 +6,9 @@ spec:
   serviceMonitorSelector:
     matchLabels:
       team: global
+  ruleSelector:
+    role: prometheus-rulefiles
+    prometheus: prometheus
   version: v1.7.1
   # Temporary until we set up some kind of auth
   externalUrl: http://127.0.0.1:8001/api/v1/proxy/namespaces/default/services/prometheus-global:web/
@@ -45,3 +48,38 @@ spec:
       prometheus: global
   endpoints:
     - port: web
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: prometheus-rules
+  labels:
+    role: prometheus-rulefiles
+    prometheus: prometheus
+data:
+  http.rules: |
+    service_status:http_request_duration_seconds_count:irate =
+      sum(irate(http_request_duration_seconds_count[15m])) by (service,status_code)
+    service:http_request_duration_seconds:50p =
+      histogram_quantile(0.5, sum(irate(http_request_duration_seconds_bucket[15m])) by (service,le))
+    service:http_request_duration_seconds:90p =
+      histogram_quantile(0.9, sum(irate(http_request_duration_seconds_bucket[15m])) by (service,le))
+    service:http_request_duration_seconds:99p =
+      histogram_quantile(0.99, sum(irate(http_request_duration_seconds_bucket[15m])) by (service,le))
+  isaacranks.rules: |
+    service_version:isaacranks_ballot_generation_seconds_count:irate =
+      sum(irate(isaacranks_ballot_generation_seconds_count[15m])) by (service,version)
+    service:isaacranks_ballot_generation_seconds:50p =
+      histogram_quantile(0.5, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m])) by (service,le))
+    service:isaacranks_ballot_generation_seconds:90p =
+      histogram_quantile(0.9, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m])) by (service,le))
+    service:isaacranks_ballot_generation_seconds:99p =
+      histogram_quantile(0.99, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m])) by (service,le))
+    service_version:isaacranks_vote_casting_seconds_count:irate =
+      sum(irate(isaacranks_vote_casting_seconds_count[15m])) by (service,version)
+    service:isaacranks_vote_casting_seconds:50p =
+      histogram_quantile(0.5, sum(irate(isaacranks_vote_casting_seconds_bucket[15m])) by (service,le))
+    service:isaacranks_vote_casting_seconds:90p =
+      histogram_quantile(0.9, sum(irate(isaacranks_vote_casting_seconds_bucket[15m])) by (service,le))
+    service:isaacranks_vote_casting_seconds:99p =
+      histogram_quantile(0.99, sum(irate(isaacranks_vote_casting_seconds_bucket[15m])) by (service,le))
