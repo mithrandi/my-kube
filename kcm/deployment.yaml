@@ -14,6 +14,7 @@ spec:
         app: kube-cert-manager
       name: kube-cert-manager
     spec:
+      serviceAccount: kube-cert-manager
       containers:
         - name: kube-cert-manager
           image: gcr.io/decisive-cinema-167507/kube-cert-manager@sha256:4e79e70added5a2e95fb10bf9a63e4234395a3e047c9bf6a6c1131c383c9f04a
@@ -43,3 +44,37 @@ spec:
         - name: "data"
           persistentVolumeClaim:
             claimName: kcm-data
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: kube-cert-manager
+  namespace: default
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+    name: kube-cert-manager
+rules:
+  - apiGroups: ["*"]
+    resources: ["certificates", "ingresses"]
+    verbs: ["get", "list", "watch"]
+  - apiGroups: ["*"]
+    resources: ["secrets"]
+    verbs: ["get", "list", "create", "update", "delete"]
+  - apiGroups: ["*"]
+    resources: ["events"]
+    verbs: ["create"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1beta1
+metadata:
+  name: kube-cert-manager-service-account
+subjects:
+  - kind: ServiceAccount
+    namespace: default
+    name: kube-cert-manager
+roleRef:
+  kind: ClusterRole
+  name: kube-cert-manager
+  apiGroup: rbac.authorization.k8s.io
