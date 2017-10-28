@@ -1,17 +1,4 @@
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRoleBinding
-metadata:
-  name: prometheus-operator
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: prometheus-operator
-subjects:
-- kind: ServiceAccount
-  name: prometheus-operator
-  namespace: default
----
-apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
 metadata:
   name: prometheus-operator
@@ -69,6 +56,19 @@ kind: ServiceAccount
 metadata:
   name: prometheus-operator
 ---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: prometheus-operator
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: prometheus-operator
+subjects:
+- kind: ServiceAccount
+  name: prometheus-operator
+  namespace: default
+---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -85,7 +85,7 @@ spec:
       serviceAccountName: prometheus-operator
       containers:
       - name: prometheus-operator
-        image: quay.io/coreos/prometheus-operator:v0.13.0
+        image: quay.io/coreos/prometheus-operator:v0.14.0
         resources:
           requests:
             cpu: 100m
