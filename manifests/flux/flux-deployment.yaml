@@ -19,7 +19,7 @@ spec:
             secretName: flux-git-deploy
       containers:
         - name: flux
-          image: quay.io/weaveworks/flux:1.1.0
+          image: quay.io/weaveworks/flux:master-5245a0c
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3030 # informational
@@ -27,10 +27,7 @@ spec:
             - name: git-key
               mountPath: /etc/fluxd/ssh
           args:
-            - --memcached-hostname=memcached.default.svc.cluster.local
-            - --memcached-timeout=100ms
-            - --memcached-service=memcached
-            - --registry-cache-expiry=20m
-            - --git-url=https://github.com/mithrandi/my-kube
+            - --git-url=git@github.com:mithrandi/my-kube.git
             - --git-branch=master
             - --git-path=manifests
+            - --ssh-keygen-type=ed25519
