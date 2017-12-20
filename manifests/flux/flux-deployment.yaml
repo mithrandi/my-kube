@@ -1,0 +1,36 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: flux
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        name: flux
+    spec:
+      serviceAccount: flux
+      volumes:
+        - name: git-key
+          secret:
+            secretName: flux-git-deploy
+      containers:
+        - name: flux
+          image: quay.io/weaveworks/flux:1.1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3030 # informational
+          volumeMounts:
+            - name: git-key
+              mountPath: /etc/fluxd/ssh
+          args:
+            - --memcached-hostname=memcached.default.svc.cluster.local
+            - --memcached-timeout=100ms
+            - --memcached-service=memcached
+            - --registry-cache-expiry=20m
+            - --git-url=https://github.com/mithrandi/my-kube
+            - --git-branch=master
+            - --git-path=manifests
