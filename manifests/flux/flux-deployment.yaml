@@ -19,7 +19,7 @@ spec:
             secretName: flux-git-deploy
       containers:
         - name: flux
-          image: quay.io/weaveworks/flux:master-5245a0c
+          image: eu.gcr.io/decisive-cinema-167507/flux:878-gcr-suffix-75f7df9
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3030 # informational
