@@ -1,0 +1,50 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: matarisvan
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: matarisvan
+  template:
+    metadata:
+      labels:
+        app: matarisvan
+    spec:
+      containers:
+        - name: trader
+          image: eu.gcr.io/decisive-cinema-167507/matarisvan:a501c39
+          args: ["/srv/matarisvan/trader.yaml"]
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "120Mi"
+            limits:
+              memory: "250Mi"
+          volumeMounts:
+            - name: matarisvan-config
+              mountPath: /srv/matarisvan
+              readOnly: true
+      volumes:
+        - name: matarisvan-config
+          secret:
+            secretName: matarisvan-config
+---
+# No network policies for the moment :(
+# apiVersion: networking.k8s.io/v1
+# kind: NetworkPolicy
+# metadata:
+#   name: matarisvan-deny
+# spec:
+#   podSelector:
+#     matchLabels:
+#       app: matarisvan
+#   policyTypes:
+#     - Ingress
+#     - Egress
+#   egress:
+#     - ports:
+#         - protocol: TCP
+#           port: 443
