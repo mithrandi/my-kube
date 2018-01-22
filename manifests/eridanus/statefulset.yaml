@@ -5,7 +5,8 @@ metadata:
 spec:
   serviceName: eridanus
   replicas: 1
-  updateStrategy: RollingUpdate
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -33,7 +34,8 @@ metadata:
 spec:
   serviceName: eridanus-slack
   replicas: 1
-  updateStrategy: RollingUpdate
+  updateStrategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:
