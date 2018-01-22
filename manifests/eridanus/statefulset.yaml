@@ -12,7 +12,7 @@ spec:
     spec:
       containers:
         - name: eridanus
-          image: eu.gcr.io/decisive-cinema-167507/eridanus:26cabd0
+          image: eu.gcr.io/decisive-cinema-167507/eridanus:5f6a2ad9094abadd4ba9892a0944fbff5703ca5a
           volumeMounts:
             - name: eridanus-data
               mountPath: /db
