@@ -77,7 +77,7 @@ spec:
     matchLabels:
       role: prometheus-rulefiles
       prometheus: prometheus
-  version: v2.0.0-rc.2
+  version: v2.1.0
   serviceAccountName: prometheus
   # Temporary until we set up some kind of auth
   externalUrl: http://127.0.0.1:8001/api/v1/proxy/namespaces/default/services/prometheus-global:web/
