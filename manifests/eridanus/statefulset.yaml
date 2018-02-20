@@ -26,32 +26,3 @@ spec:
         resources:
           requests:
             storage: 100M
----
-apiVersion: "apps/v1beta1"
-kind: StatefulSet
-metadata:
-  name: eridanus-slack
-spec:
-  serviceName: eridanus-slack
-  replicas: 1
-  updateStrategy:
-    type: RollingUpdate
-  template:
-    metadata:
-      labels:
-        app: eridanus-slack
-    spec:
-      containers:
-        - name: eridanus-slack
-          image: eu.gcr.io/decisive-cinema-167507/eridanus:26cabd0
-          volumeMounts:
-            - name: eridanus-slack-data
-              mountPath: /db
-  volumeClaimTemplates:
-    - metadata:
-        name: eridanus-slack-data
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 100M
