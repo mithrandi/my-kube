@@ -30,6 +30,6 @@ spec:
           mountPath: /etc/fluxd/ssh
           readOnly: true # this will be the case perforce in K8s >=1.10
         args:
-        - --git-url=git@github.com:mithrandi/my-kube.git
+        - --git-url=ssh://git@github.com:mithrandi/my-kube.git
         - --git-branch=master
         - --git-charts-path=charts
