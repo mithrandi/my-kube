@@ -2,8 +2,6 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: global-ingress
-  labels:
-    stable.k8s.psg.io/kcm.class: 'default'
   annotations:
     kubernetes.io/ingress.class: 'gce'
     kubernetes.io/ingress.global-static-ip-name: 'k8s-fw-default-global-ingress--6928bd11e243f349'
@@ -109,3 +107,34 @@ spec:
           - backend:
               serviceName: isaacranks-prod-isaacranks
               servicePort: web
+---
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: ingress-cert
+  namespace: default
+spec:
+  secretName: acme-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: mithrandi.net
+  dnsNames:
+    - ucdapi.org
+    - pb.codehash.net
+    - qdb.codehash.net
+    - graphs.mithrandi.net
+    - test.isaacranks.com
+    - www.isaacranks.com
+  acme:
+    config:
+      - dns01:
+          provider: prod-route53
+        domains:
+          - mithrandi.net
+          - ucdapi.org
+          - pb.codehash.net
+          - qdb.codehash.net
+          - graphs.mithrandi.net
+          - test.isaacranks.com
+          - www.isaacranks.com
