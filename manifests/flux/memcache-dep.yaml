@@ -1,28 +1,27 @@
 ---
-# You can optionally deploy memcache, for the Flux daemon to cache
-# container image metadata.
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: memcached
+  namespace: default
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: memcached
+      name: memcached
   template:
     metadata:
       labels:
-        app: memcached
+        name: memcached
     spec:
       containers:
         - name: memcached
-          image: memcached:1.4.25
+          image: memcached:1.5.15
           imagePullPolicy: IfNotPresent
           args:
             - -m 64    # Maximum memory to use, in megabytes. 64MB is default.
-            - -p 11211    # Default port, but being explicit is nice.
-            - -vv    # This gets us to the level of request logs.
+            - -I 5m    # Maximum size for one item
+            - -p 11211 # Default port
           resources:
             requests:
               cpu: "5m"
@@ -32,3 +31,7 @@ spec:
           ports:
             - name: clients
               containerPort: 11211
+          securityContext:
+            runAsUser: 11211
+            runAsGroup: 11211
+            allowPrivilegeEscalation: false
