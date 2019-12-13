@@ -8,6 +8,8 @@ metadata:
     name: flux
   name: flux
   namespace: default
+  annotations:
+    iam.gke.io/gcp-service-account: flux-service-account@decisive-cinema-167507.iam.gserviceaccount.com
 ---
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRole
@@ -36,3 +38,26 @@ subjects:
   - kind: ServiceAccount
     name: flux
     namespace: default
+---
+apiVersion: iam.cnrm.cloud.google.com/v1alpha1
+kind: IAMServiceAccount
+metadata:
+  name: flux-service-account
+  namespace: decisive-cinema-167507
+spec:
+  displayName: Flux Service Account
+---
+apiVersion: iam.cnrm.cloud.google.com/v1alpha1
+kind: IAMPolicy
+metadata:
+  name: iampolicy-flux
+  namespace: decisive-cinema-167507
+spec:
+  resourceRef:
+    apiVersion: iam.cnrm.cloud.google.com/v1alpha1
+    kind: IAMServiceAccount
+    name: flux-service-account
+  bindings:
+    - role: roles/iam.workloadIdentityUser
+      members:
+        - serviceAccount:decisive-cinema-167507.svc.id.goog[default/flux]
