@@ -32,7 +32,7 @@ spec:
           medium: Memory
       containers:
         - name: flux
-          image: docker.io/fluxcd/flux:1.15.0
+          image: docker.io/fluxcd/flux:1.17.0
           imagePullPolicy: IfNotPresent
           resources:
             requests:
@@ -61,6 +61,7 @@ spec:
           args:
             - --memcached-service=
             - --ssh-keygen-dir=/var/fluxd/keygen
+            - --manifest-generation=true
             - --git-url=git@github.com:mithrandi/my-kube.git
             - --git-branch=master
             - --git-path=manifests
