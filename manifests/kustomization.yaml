@@ -8,7 +8,6 @@ resources:
 - grafana/deployment.yaml
 - grafana/svc.yaml
 - ingress.yaml
-- isaacranks
 - issuer.yaml
 - lambdacircus/deployment.yaml
 - lambdacircus/svc.yaml
