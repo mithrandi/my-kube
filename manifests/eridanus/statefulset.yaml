@@ -1,10 +1,15 @@
-apiVersion: "apps/v1beta1"
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: eridanus
+  labels:
+    app: eridanus
 spec:
   serviceName: eridanus
   replicas: 1
+  selector:
+    matchLabels:
+      app: eridanus
   updateStrategy:
     type: RollingUpdate
   template:

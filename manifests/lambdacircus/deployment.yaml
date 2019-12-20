@@ -1,10 +1,14 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: lambdacircus-deployment
+  labels:
+    app: lambdacircus
 spec:
   replicas: 2
-  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: lambdacircus
   template:
     metadata:
       labels:
@@ -21,7 +25,7 @@ spec:
             - name: IP_FROM_HEADER
               value: 'true'
             - name: PGHOST
-              value: '127.0.0.1'
+              value: gcloud-sqlproxy-gcloud-sqlproxy
             - name: PGPORT
               value: '5432'
             - name: PGUSER
@@ -44,28 +48,3 @@ spec:
           resources:
             requests:
               cpu: "10m"
-        - image: gcr.io/cloudsql-docker/gce-proxy:1.09
-          name: cloudsql-proxy
-          command: ["/cloud_sql_proxy", "--dir=/cloudsql",
-                    "-instances=decisive-cinema-167507:europe-west1:pg-global=tcp:5432",
-                    "-credential_file=/secrets/cloudsql/credentials.json"]
-          volumeMounts:
-            - name: cloudsql-instance-credentials
-              mountPath: /secrets/cloudsql
-              readOnly: true
-            - name: ssl-certs
-              mountPath: /etc/ssl/certs
-            - name: cloudsql
-              mountPath: /cloudsql
-          resources:
-            requests:
-              cpu: "10m"
-      volumes:
-        - name: cloudsql-instance-credentials
-          secret:
-            secretName: cloudsql-instance-credentials
-        - name: ssl-certs
-          hostPath:
-            path: /etc/ssl/certs
-        - name: cloudsql
-          emptyDir:
