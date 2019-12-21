@@ -80,7 +80,7 @@ spec:
   version: v2.1.0
   serviceAccountName: prometheus
   # Temporary until we set up some kind of auth
-  externalUrl: http://127.0.0.1:8001/api/v1/proxy/namespaces/default/services/prometheus-global:web/
+  externalUrl: http://127.0.0.1:8001/api/v1/namespaces/default/services/prometheus-global:web/proxy/
   resources:
     requests:
       memory: 400Mi
