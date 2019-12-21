@@ -45,7 +45,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: isaacranks-test-isaacranks
+              serviceName: test-isaacranks-web
               servicePort: web
     - host: www.isaacranks.com
       http:
@@ -100,7 +100,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: isaacranks-test-isaacranks
+              serviceName: test-isaacranks-web
               servicePort: web
     - host: www.isaacranks.com
       http:
