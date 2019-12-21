@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  labels:
+    component: web
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: web
+  template:
+    metadata:
+      labels:
+        component: web
+    spec:
+      containers:
+        - name: isaacranks
+          image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.6
+          command: ["/usr/local/bin/isaacranks"]
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: PGHOST
+              value: gcloud-sqlproxy-gcloud-sqlproxy
+            - name: PGPORT
+              value: "5432"
+            - name: PGUSER
+              valueFrom:
+                secretKeyRef:
+                  name: isaacranks-db-credentials
+                  key: username
+            - name: PGPASS
+              valueFrom:
+                secretKeyRef:
+                  name: isaacranks-db-credentials
+                  key: password
+            - name: PGDATABASE
+              value: isaacranks
+            - name: BALLOT_MASKING_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: isaacranks
+                  key: ballot-key
+          livenessProbe:
+            httpGet:
+              path: /metrics
+              port: 3000
+          readinessProbe:
+            httpGet:
+              path: /metrics
+              port: 3000

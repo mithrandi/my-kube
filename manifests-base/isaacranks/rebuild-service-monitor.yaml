@@ -1,0 +1,13 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rebuild
+  labels:
+    team: global
+    component: rebuild
+spec:
+  selector:
+    matchLabels:
+      component: rebuild
+  endpoints:
+    - port: web

@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- service.yaml
+- web-deployment.yaml
+- rebuild-deployment.yaml
+- rebuild-service.yaml
+- rebuild-service-monitor.yaml
+- service-monitor.yaml
+namePrefix: isaacranks-
+namespace: default
+commonLabels:
+  app: isaacranks
+configurations:
+- service-monitor-kind.yaml
