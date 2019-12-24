@@ -6,3 +6,11 @@ metadata:
     fluxcd.io/automated: "true"
   name: test-isaacranks-web
   namespace: default
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: isaacranks
+      containers:
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.6-1-gcf60377
+        name: isaacranks
