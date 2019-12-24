@@ -6,6 +6,14 @@ metadata:
     fluxcd.io/automated: "true"
   name: test-isaacranks-rebuild
   namespace: default
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: rebuildranks
+      containers:
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.8
+        name: rebuildranks
 ---
 apiVersion: apps/v1
 kind: Deployment
