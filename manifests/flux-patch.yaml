@@ -12,5 +12,5 @@ spec:
       $setElementOrder/containers:
       - name: isaacranks
       containers:
-      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.7
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.8
         name: isaacranks
