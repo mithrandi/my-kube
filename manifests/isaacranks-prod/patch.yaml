@@ -20,7 +20,7 @@ spec:
                   name: isaacranks-prod-db-credentials
                   key: password
             - name: PGDATABASE
-              value: isaacranks-prod
+              value: isaacranks_prod
             - name: BALLOT_MASKING_KEY
               valueFrom:
                 secretKeyRef:
@@ -48,7 +48,7 @@ spec:
                   name: isaacranks-prod-db-credentials
                   key: password
             - name: PGDATABASE
-              value: isaacranks-prod
+              value: isaacranks_prod
             - name: BALLOT_MASKING_KEY
               valueFrom:
                 secretKeyRef:
