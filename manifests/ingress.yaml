@@ -51,7 +51,7 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: isaacranks-prod-isaacranks
+              serviceName: prod-isaacranks-web
               servicePort: web
 ---
 apiVersion: networking.k8s.io/v1beta1
@@ -106,10 +106,6 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: isaacranks-prod-isaacranks
-              servicePort: web
-          - path: /garbage
-            backend:
               serviceName: prod-isaacranks-web
               servicePort: web
 ---
