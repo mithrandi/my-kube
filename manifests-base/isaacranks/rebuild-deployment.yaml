@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rebuildranks
-          image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.6
+          image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.8
           command: ["/usr/local/bin/rebuildranks"]
           args: ["300"]
           imagePullPolicy: IfNotPresent
