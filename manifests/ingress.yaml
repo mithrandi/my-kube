@@ -108,3 +108,20 @@ spec:
           - backend:
               serviceName: isaacranks-prod-isaacranks
               servicePort: web
+          - path: /garbage
+            backend:
+              serviceName: prod-isaacranks-web
+              servicePort: web
+---
+apiVersion: cloud.google.com/v1beta1
+kind: BackendConfig
+metadata:
+  namespace: default
+  name: main-config
+spec:
+  cdn:
+    enabled: true
+    cachePolicy:
+      includeHost: true
+      includeProtocol: true
+      includeQueryString: true

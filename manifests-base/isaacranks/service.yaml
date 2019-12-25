@@ -4,6 +4,8 @@ metadata:
   name: web
   labels:
     component: web
+  annotations:
+    beta.cloud.google.com/backend-config: '{"default": "main-config"}'
 spec:
   type: NodePort
   ports:
