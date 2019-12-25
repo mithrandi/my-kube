@@ -28,13 +28,13 @@ def make(prefix, title):
                     dataSource='prometheus',
                     valueName='current',
                     sparkline=G.SparkLine(show=True),
-                    targets=[target(expr='count by(service) (up{{service="{}-isaacranks"}} == 1)')]),
+                    targets=[target(expr='count by(service) (up{{service="{}-isaacranks-web"}} == 1)')]),
                 G.SingleStat(
                     title='Pods up (rebuild)',
                     dataSource='prometheus',
                     valueName='current',
                     sparkline=G.SparkLine(show=True),
-                    targets=[target(expr='count by(service) (up{{service="{}-rebuild"}} == 1)')]),
+                    targets=[target(expr='count by(service) (up{{service="{}-isaacranks-rebuild"}} == 1)')]),
             ]),
             G.Row(panels=[
                 G.Graph(
@@ -42,23 +42,23 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"1.."}}',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks-web",status_code=~"1.."}}',
                             legendFormat='1xx',
                             refId='A'),
                         target(
-                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"2.."}}',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks-web",status_code=~"2.."}}',
                             legendFormat='2xx',
                             refId='B'),
                         target(
-                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"3.."}}',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks-web",status_code=~"3.."}}',
                             legendFormat='3xx',
                             refId='C'),
                         target(
-                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"4.."}}',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks-web",status_code=~"4.."}}',
                             legendFormat='4xx',
                             refId='D'),
                         target(
-                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks",status_code=~"5.."}}',
+                            expr='service_status:http_request_duration_seconds_count:irate{{service="{}-isaacranks-web",status_code=~"5.."}}',
                             legendFormat='5xx',
                             refId='E'),
                     ],
@@ -75,15 +75,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service:http_request_duration_seconds:50p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:http_request_duration_seconds:50p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='service:http_request_duration_seconds:90p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:http_request_duration_seconds:90p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='service:http_request_duration_seconds:99p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:http_request_duration_seconds:99p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],
@@ -97,7 +97,7 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service_version:isaacranks_ballot_generation_seconds_count:irate{{service="{}-isaacranks"}}',
+                            expr='service_version:isaacranks_ballot_generation_seconds_count:irate{{service="{}-isaacranks-web"}}',
                             legendFormat='{{version}}',
                             refId='A')
                     ],
@@ -115,15 +115,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service:isaacranks_ballot_generation_seconds:50p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:50p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='service:isaacranks_ballot_generation_seconds:90p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:90p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='service:isaacranks_ballot_generation_seconds:99p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_ballot_generation_seconds:99p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],
@@ -136,7 +136,7 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service_version:isaacranks_vote_casting_seconds_count:irate{{service="{}-isaacranks"}}',
+                            expr='service_version:isaacranks_vote_casting_seconds_count:irate{{service="{}-isaacranks-web"}}',
                             legendFormat='{{version}}',
                             refId='A')
                     ],
@@ -152,15 +152,15 @@ def make(prefix, title):
                     dataSource='prometheus',
                     targets=[
                         target(
-                            expr='service:isaacranks_vote_casting_seconds:50p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:50p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.5q',
                             refId='A'),
                         target(
-                            expr='service:isaacranks_vote_casting_seconds:90p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:90p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.9q',
                             refId='B'),
                         target(
-                            expr='service:isaacranks_vote_casting_seconds:99p{{service="{}-isaacranks"}} * 1000',
+                            expr='service:isaacranks_vote_casting_seconds:99p{{service="{}-isaacranks-web"}} * 1000',
                             legendFormat='0.99q',
                             refId='C'),
                     ],
@@ -172,7 +172,7 @@ def make(prefix, title):
                     title='Time since last rebuild',
                     dataSource='prometheus',
                     targets=[target(
-                        expr='time() - (isaacranks_last_rebuild_timestamp{{service="{}-rebuild"}} != 0)',
+                        expr='time() - (isaacranks_last_rebuild_timestamp{{service="{}-isaacranks-rebuild"}} != 0)',
                         legendFormat='Age')],
                     legend=G.Legend(current=True),
                     yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
@@ -181,7 +181,7 @@ def make(prefix, title):
                     title='Rebuild duration',
                     dataSource='prometheus',
                     targets=[target(
-                        expr='isaacranks_last_rebuild_duration_seconds{{service="{}-rebuild"}} != 0',
+                        expr='isaacranks_last_rebuild_duration_seconds{{service="{}-isaacranks-rebuild"}} != 0',
                         legendFormat='Duration')],
                     legend=G.Legend(current=True),
                     yAxes=[G.YAxis(format=G.SECONDS_FORMAT),
