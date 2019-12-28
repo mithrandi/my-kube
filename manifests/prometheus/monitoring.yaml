@@ -89,6 +89,14 @@ spec:
       requests:
         storage: 40Gi
   containers:
+  - name: prometheus-config-reloader
+    resources:
+      requests:
+        cpu: 5m
+  - name: rules-configmap-reloader
+    resources:
+      requests:
+        cpu: 5m
   - name: sidecar
     image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.0
     imagePullPolicy: IfNotPresent
@@ -103,3 +111,6 @@ spec:
     volumeMounts:
     - mountPath: /data
       name: prometheus-prometheus-db
+    resources:
+      requests:
+        cpu: 5m
