@@ -77,7 +77,7 @@ spec:
     matchLabels:
       role: prometheus-rulefiles
       prometheus: prometheus
-  version: v2.1.0
+  version: v2.15.1
   serviceAccountName: prometheus
   # Temporary until we set up some kind of auth
   externalUrl: http://127.0.0.1:8001/api/v1/namespaces/default/services/prometheus-global:web/proxy/
@@ -88,3 +88,18 @@ spec:
     resources:
       requests:
         storage: 40Gi
+  containers:
+  - name: sidecar
+    image: gcr.io/stackdriver-prometheus/stackdriver-prometheus-sidecar:0.7.0
+    imagePullPolicy: IfNotPresent
+    args:
+    - "--stackdriver.project-id=decisive-cinema-167507"
+    - "--prometheus.wal-directory=/data/wal"
+    - "--stackdriver.kubernetes.location=europe-west1-d"
+    - "--stackdriver.kubernetes.cluster-name=cluster-1"
+    ports:
+    - name: sidecar
+      containerPort: 9091
+    volumeMounts:
+    - mountPath: /data
+      name: prometheus-prometheus-db
