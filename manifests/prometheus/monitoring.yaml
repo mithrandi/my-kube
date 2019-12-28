@@ -90,6 +90,10 @@ spec:
         resources:
           requests:
             storage: 40Gi
+  securityContext:
+    fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
   containers:
   - name: prometheus-config-reloader
     resources:
@@ -117,3 +121,7 @@ spec:
     resources:
       requests:
         cpu: 5m
+    securityContext:
+      fsGroup: 2000
+      runAsNonRoot: true
+      runAsUser: 1000
