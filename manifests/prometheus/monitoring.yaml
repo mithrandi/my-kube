@@ -85,9 +85,11 @@ spec:
     requests:
       memory: 400Mi
   storage:
-    resources:
-      requests:
-        storage: 40Gi
+    volumeClaimTemplate:
+      spec:
+        resources:
+          requests:
+            storage: 40Gi
   containers:
   - name: prometheus-config-reloader
     resources:
