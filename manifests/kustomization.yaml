@@ -4,8 +4,14 @@ resources:
 - codetip/deployment.yaml
 - codetip/svc.yaml
 - eridanus/statefulset.yaml
-- grafana/deployment.yaml
-- grafana/svc.yaml
+- flux/flux-account.yaml
+- flux/flux-deployment.yaml
+- flux/flux-secret.yaml
+- flux/memcache-dep.yaml
+- flux/memcache-svc.yaml
+- flux/ns.yaml
+# - grafana/deployment.yaml
+# - grafana/svc.yaml
 - ingress.yaml
 - isaacranks-prod
 - isaacranks-test
@@ -13,6 +19,7 @@ resources:
 - lambdacircus/deployment.yaml
 - lambdacircus/svc.yaml
 - matarisvan/deployment.yaml
+- policy.yaml
 - prometheus/monitoring.yaml
 - prometheus/operator-deployment.yaml
 - prometheus/operator-other.yaml

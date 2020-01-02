@@ -1,21 +1,46 @@
+apiVersion: compute.cnrm.cloud.google.com/v1alpha3
+kind: ComputeAddress
+metadata:
+  name: global-ingress
+  namespace: decisive-cinema-167507
+spec:
+  location: global
+---
+apiVersion: compute.cnrm.cloud.google.com/v1alpha3
+kind: ComputeAddress
+metadata:
+  name: global-ingress-v6
+  namespace: decisive-cinema-167507
+spec:
+  location: global
+  ipVersion: IPV6
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: global-ingress
   annotations:
     kubernetes.io/ingress.class: 'gce'
-    kubernetes.io/ingress.global-static-ip-name: 'k8s-fw-default-global-ingress--6928bd11e243f349'
+    kubernetes.io/ingress.global-static-ip-name: 'global-ingress'
     cert-manager.io/cluster-issuer: letsencrypt-prod
 spec:
   tls:
     - hosts:
         - ucdapi.org
-        - pb.codehash.net
-        - qdb.codehash.net
-        - graphs.mithrandi.net
-        - test.isaacranks.com
-        - www.isaacranks.com
+  #       - graphs.mithrandi.net
       secretName: acme-tls
+    - hosts:
+        - pb.codehash.net
+      secretName: acme-tls-pbc
+    - hosts:
+        - qdb.codehash.net
+      secretName: acme-tls-qdb
+    - hosts:
+        - test.isaacranks.com
+      secretName: acme-tls-ir-test
+    - hosts:
+        - www.isaacranks.com
+      secretName: acme-tls-ir-prod
   rules:
     - host: ucdapi.org
       http:
@@ -35,12 +60,12 @@ spec:
           - backend:
               serviceName: lambdacircus
               servicePort: 80
-    - host: graphs.mithrandi.net
-      http:
-        paths:
-          - backend:
-              serviceName: grafana
-              servicePort: web
+    # - host: graphs.mithrandi.net
+    #   http:
+    #     paths:
+    #       - backend:
+    #           serviceName: grafana
+    #           servicePort: web
     - host: test.isaacranks.com
       http:
         paths:
@@ -59,18 +84,25 @@ kind: Ingress
 metadata:
   name: global-ingress6
   annotations:
-    kubernetes.io/ingress.global-static-ip-name: 'lbv6'
+    kubernetes.io/ingress.global-static-ip-name: 'global-ingress-v6'
     kubernetes.io/ingress.class: 'gce'
 spec:
   tls:
     - hosts:
         - ucdapi.org
-        - pb.codehash.net
-        - qdb.codehash.net
-        - graphs.mithrandi.net
-        - test.isaacranks.com
-        - www.isaacranks.com
       secretName: acme-tls
+    - hosts:
+        - pb.codehash.net
+      secretName: acme-tls-pbc
+    - hosts:
+        - qdb.codehash.net
+      secretName: acme-tls-qdb
+    - hosts:
+        - test.isaacranks.com
+      secretName: acme-tls-ir-test
+    - hosts:
+        - www.isaacranks.com
+      secretName: acme-tls-ir-prod
   rules:
     - host: ucdapi.org
       http:
@@ -90,12 +122,12 @@ spec:
           - backend:
               serviceName: lambdacircus
               servicePort: 80
-    - host: graphs.mithrandi.net
-      http:
-        paths:
-          - backend:
-              serviceName: grafana
-              servicePort: web
+    # - host: graphs.mithrandi.net
+    #   http:
+    #     paths:
+    #       - backend:
+    #           serviceName: grafana
+    #           servicePort: web
     - host: test.isaacranks.com
       http:
         paths:
@@ -108,16 +140,3 @@ spec:
           - backend:
               serviceName: prod-isaacranks-web
               servicePort: web
----
-apiVersion: cloud.google.com/v1beta1
-kind: BackendConfig
-metadata:
-  namespace: default
-  name: main-config
-spec:
-  cdn:
-    enabled: true
-    cachePolicy:
-      includeHost: true
-      includeProtocol: true
-      includeQueryString: true

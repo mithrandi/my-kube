@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: rebuildranks
-          image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.8
+          image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.10
           command: ["/usr/local/bin/rebuildranks"]
           args: ["300"]
           imagePullPolicy: IfNotPresent
@@ -24,7 +24,7 @@ spec:
             - containerPort: 3000
           env:
             - name: PGHOST
-              value: gcloud-sqlproxy-gcloud-sqlproxy
+              value: 172.30.16.3
             - name: PGPORT
               value: "5432"
             - name: PGUSER

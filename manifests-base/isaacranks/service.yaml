@@ -5,7 +5,8 @@ metadata:
   labels:
     component: web
   annotations:
-    beta.cloud.google.com/backend-config: '{"default": "main-config"}'
+    beta.cloud.google.com/backend-config: '{"ports": {"80":"standard"}}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
   ports:

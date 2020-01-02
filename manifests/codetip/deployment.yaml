@@ -19,7 +19,7 @@ spec:
           image: eu.gcr.io/decisive-cinema-167507/codetip:ea41fef
           args:
             - '--database-uri'
-            - 'jdbc:postgresql://gcloud-sqlproxy-gcloud-sqlproxy:5432/codetip?user=$(DB_USER)&password=$(DB_PASS)'
+            - 'jdbc:postgresql://172.30.16.3:5432/codetip?user=$(DB_USER)&password=$(DB_PASS)'
           ports:
             - containerPort: 80
           env:

@@ -4,6 +4,9 @@ metadata:
   name: codetip
   labels:
     app: codetip
+  annotations:
+    beta.cloud.google.com/backend-config: '{"ports": {"80":"standard"}}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
   type: NodePort
   ports:

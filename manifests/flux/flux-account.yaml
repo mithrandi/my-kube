@@ -7,7 +7,7 @@ metadata:
   labels:
     name: flux
   name: flux
-  namespace: default
+  namespace: flux
   annotations:
     iam.gke.io/gcp-service-account: flux-service-account@decisive-cinema-167507.iam.gserviceaccount.com
 ---
@@ -17,6 +17,7 @@ metadata:
   labels:
     name: flux
   name: flux
+  namespace: flux
 rules:
   - apiGroups: ['*']
     resources: ['*']
@@ -30,6 +31,7 @@ metadata:
   labels:
     name: flux
   name: flux
+  namespace: flux
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -37,7 +39,7 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: flux
-    namespace: default
+    namespace: flux
 ---
 apiVersion: iam.cnrm.cloud.google.com/v1alpha1
 kind: IAMServiceAccount
