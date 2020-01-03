@@ -12,13 +12,13 @@ spec:
       - record: service_status:http_request_duration_seconds_count:irate
         expr: sum(irate(http_request_duration_seconds_count[15m])) BY (service, status_code)
       - record: service:http_request_duration_seconds:50p
-        expr: histogram_quantile(0.5, sum(irate(http_request_duration_seconds[15m]))
+        expr: histogram_quantile(0.5, sum(irate(http_request_duration_seconds_bucket[15m]))
           BY (service, le))
       - record: service:http_request_duration_seconds:90p
-        expr: histogram_quantile(0.9, sum(irate(http_request_duration_seconds[15m]))
+        expr: histogram_quantile(0.9, sum(irate(http_request_duration_seconds_bucket[15m]))
           BY (service, le))
       - record: service:http_request_duration_seconds:99p
-        expr: histogram_quantile(0.99, sum(irate(http_request_duration_seconds[15m]))
+        expr: histogram_quantile(0.99, sum(irate(http_request_duration_seconds_bucket[15m]))
           BY (service, le))
     - name: isaacranks.rules
       rules:
@@ -26,22 +26,22 @@ spec:
         expr: sum(irate(isaacranks_ballot_generation_seconds_count[15m])) BY (service,
           version)
       - record: service:isaacranks_ballot_generation_seconds:50p
-        expr: histogram_quantile(0.5, sum(irate(isaacranks_ballot_generation_seconds[15m]))
+        expr: histogram_quantile(0.5, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m]))
           BY (service, le))
       - record: service:isaacranks_ballot_generation_seconds:90p
-        expr: histogram_quantile(0.9, sum(irate(isaacranks_ballot_generation_seconds[15m]))
+        expr: histogram_quantile(0.9, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m]))
           BY (service, le))
       - record: service:isaacranks_ballot_generation_seconds:99p
-        expr: histogram_quantile(0.99, sum(irate(isaacranks_ballot_generation_seconds[15m]))
+        expr: histogram_quantile(0.99, sum(irate(isaacranks_ballot_generation_seconds_bucket[15m]))
           BY (service, le))
       - record: service_version:isaacranks_vote_casting_seconds_count:irate
         expr: sum(irate(isaacranks_vote_casting_seconds_count[15m])) BY (service, version)
       - record: service:isaacranks_vote_casting_seconds:50p
-        expr: histogram_quantile(0.5, sum(irate(isaacranks_vote_casting_seconds[15m]))
+        expr: histogram_quantile(0.5, sum(irate(isaacranks_vote_casting_seconds_bucket[15m]))
           BY (service, le))
       - record: service:isaacranks_vote_casting_seconds:90p
-        expr: histogram_quantile(0.9, sum(irate(isaacranks_vote_casting_seconds[15m]))
+        expr: histogram_quantile(0.9, sum(irate(isaacranks_vote_casting_seconds_bucket[15m]))
           BY (service, le))
       - record: service:isaacranks_vote_casting_seconds:99p
-        expr: histogram_quantile(0.99, sum(irate(isaacranks_vote_casting_seconds[15m]))
+        expr: histogram_quantile(0.99, sum(irate(isaacranks_vote_casting_seconds_bucket[15m]))
           BY (service, le))
