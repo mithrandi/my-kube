@@ -27,7 +27,6 @@ spec:
   tls:
     - hosts:
         - ucdapi.org
-  #       - graphs.mithrandi.net
       secretName: acme-tls
     - hosts:
         - pb.codehash.net
@@ -35,6 +34,9 @@ spec:
     - hosts:
         - qdb.codehash.net
       secretName: acme-tls-qdb
+    - hosts:
+        - graphs.mithrandi.net
+      secretName: acme-tls-graphs
     - hosts:
         - test.isaacranks.com
       secretName: acme-tls-ir-test
@@ -60,12 +62,12 @@ spec:
           - backend:
               serviceName: lambdacircus
               servicePort: 80
-    # - host: graphs.mithrandi.net
-    #   http:
-    #     paths:
-    #       - backend:
-    #           serviceName: grafana
-    #           servicePort: web
+    - host: graphs.mithrandi.net
+      http:
+        paths:
+          - backend:
+              serviceName: grafana
+              servicePort: web
     - host: test.isaacranks.com
       http:
         paths:
@@ -98,6 +100,9 @@ spec:
         - qdb.codehash.net
       secretName: acme-tls-qdb
     - hosts:
+        - graphs.mithrandi.net
+      secretName: acme-tls-graphs
+    - hosts:
         - test.isaacranks.com
       secretName: acme-tls-ir-test
     - hosts:
@@ -122,12 +127,12 @@ spec:
           - backend:
               serviceName: lambdacircus
               servicePort: 80
-    # - host: graphs.mithrandi.net
-    #   http:
-    #     paths:
-    #       - backend:
-    #           serviceName: grafana
-    #           servicePort: web
+    - host: graphs.mithrandi.net
+      http:
+        paths:
+          - backend:
+              serviceName: grafana
+              servicePort: web
     - host: test.isaacranks.com
       http:
         paths:

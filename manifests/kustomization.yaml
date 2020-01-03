@@ -10,8 +10,7 @@ resources:
 - flux/memcache-dep.yaml
 - flux/memcache-svc.yaml
 - flux/ns.yaml
-# - grafana/deployment.yaml
-# - grafana/svc.yaml
+- grafana
 - ingress.yaml
 - isaacranks-prod
 - isaacranks-test
