@@ -1,13 +1,12 @@
-kind: ConfigMap
-apiVersion: v1
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
 metadata:
   name: prometheus-rules
   labels:
     role: prometheus-rulefiles
     prometheus: prometheus
-data:
-  http.rules.yaml: |
-    groups:
+spec:
+  groups:
     - name: http.rules
       rules:
       - record: service_status:http_request_duration_seconds_count:irate
@@ -21,8 +20,6 @@ data:
       - record: service:http_request_duration_seconds:99p
         expr: histogram_quantile(0.99, sum(irate(http_request_duration_seconds[15m]))
           BY (service, le))
-  isaacranks.rules.yaml: |
-    groups:
     - name: isaacranks.rules
       rules:
       - record: service_version:isaacranks_ballot_generation_seconds_count:irate
