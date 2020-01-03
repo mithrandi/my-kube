@@ -6,7 +6,7 @@ metadata:
     role: prometheus-rulefiles
     prometheus: prometheus
 data:
-  http.rules.yml: |
+  http.rules.yaml: |
     groups:
     - name: http.rules
       rules:
@@ -21,7 +21,7 @@ data:
       - record: service:http_request_duration_seconds:99p
         expr: histogram_quantile(0.99, sum(irate(http_request_duration_seconds[15m]))
           BY (service, le))
-  isaacranks.rules: |
+  isaacranks.rules.yaml: |
     groups:
     - name: isaacranks.rules
       rules:
