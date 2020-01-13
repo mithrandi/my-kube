@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: trader
-          image: eu.gcr.io/decisive-cinema-167507/matarisvan:9293f7ee624cf4f9a19a11fa3d7da9c996cbf03f
+          image: eu.gcr.io/decisive-cinema-167507/matarisvan:e467686
           args: ["/srv/matarisvan/trader.yaml"]
           resources:
             requests:
