@@ -12,7 +12,7 @@ spec:
       $setElementOrder/containers:
       - name: rebuildranks
       containers:
-      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.10
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:git-df8a5a67934ab010d4389a50849147e18cbae0f9
         name: rebuildranks
 ---
 apiVersion: apps/v1
@@ -28,5 +28,5 @@ spec:
       $setElementOrder/containers:
       - name: isaacranks
       containers:
-      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.10
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:git-df8a5a67934ab010d4389a50849147e18cbae0f9
         name: isaacranks
