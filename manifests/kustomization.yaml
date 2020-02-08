@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
 - codetip/deployment.yaml
 - codetip/svc.yaml
-- eridanus/statefulset.yaml
 - flux/flux-account.yaml
 - flux/flux-deployment.yaml
 - flux/flux-secret.yaml
