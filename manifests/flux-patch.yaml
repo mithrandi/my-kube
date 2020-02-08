@@ -2,6 +2,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: prod-isaacranks-web
+  namespace: default
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: isaacranks
+      containers:
+      - image: eu.gcr.io/decisive-cinema-167507/isaacranks:1.0.12
+        name: isaacranks
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   annotations:
     fluxcd.io/automated: "true"
   name: test-isaacranks-rebuild
