@@ -2,6 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: matarisvan
+spec:
+  template:
+    spec:
+      $setElementOrder/containers:
+      - name: trader
+      containers:
+      - image: eu.gcr.io/decisive-cinema-167507/matarisvan:76ea8a4
+        name: trader
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
   name: prod-isaacranks-rebuild
   namespace: default
 spec:
