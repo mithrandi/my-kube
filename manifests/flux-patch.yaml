@@ -9,7 +9,7 @@ spec:
       $setElementOrder/containers:
       - name: trader
       containers:
-      - image: eu.gcr.io/decisive-cinema-167507/matarisvan:da6bf48
+      - image: eu.gcr.io/decisive-cinema-167507/matarisvan:69c825d
         name: trader
 ---
 apiVersion: apps/v1
