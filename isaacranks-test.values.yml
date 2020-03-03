@@ -1,4 +1,0 @@
-db:
-  hostname: gcloud-sqlproxy-gcloud-sqlproxy
-  secretName: isaacranks-test-db-credentials
-  database: isaacranks_test
