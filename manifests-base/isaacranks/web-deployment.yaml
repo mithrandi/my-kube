@@ -51,3 +51,6 @@ spec:
             httpGet:
               path: /metrics
               port: 3000
+          resources:
+            requests:
+              cpu: 50m
