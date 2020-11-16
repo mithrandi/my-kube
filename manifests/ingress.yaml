@@ -15,6 +15,15 @@ spec:
   location: global
   ipVersion: IPV6
 ---
+apiVersion: networking.gke.io/v1beta1
+kind: FrontendConfig
+metadata:
+  name: global-frontend-config
+spec:
+  redirectToHttps:
+    enabled: true
+    responseCodeName: PERMANENT_REDIRECT
+---
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
@@ -23,6 +32,7 @@ metadata:
     kubernetes.io/ingress.class: 'gce'
     kubernetes.io/ingress.global-static-ip-name: 'global-ingress'
     cert-manager.io/cluster-issuer: letsencrypt-prod
+    networking.gke.io/v1beta1.FrontendConfig: global-frontend-config
 spec:
   tls:
     - hosts:
@@ -88,6 +98,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: 'global-ingress-v6'
     kubernetes.io/ingress.class: 'gce'
+    networking.gke.io/v1beta1.FrontendConfig: global-frontend-config
 spec:
   tls:
     - hosts:
